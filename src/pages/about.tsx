@@ -6,6 +6,7 @@ import fs from "fs";
 import yaml from "js-yaml";
 import { getPageBySlug } from "../lib/pages";
 import PageLayout from "../components/PageLayout";
+import { DottedMap } from "@/components/ui/dotted-map";
 
 export type Props = {
   title: string;
@@ -32,14 +33,30 @@ export default function About({
   source,
 }: Props) {
   return (
-    <PageLayout
-      title={title}
-      slug={slug}
-      description={description}
-      keywords={keywords}
-    >
-      <MDXRemote {...source} components={components} />
-    </PageLayout>
+    <div className="relative min-h-screen z-10">
+      {/* DottedMap as background element */}
+      <div className="fixed inset-0 h-full z-0 opacity-20">
+        <DottedMap
+          width={150}
+          height={75}
+          mapSamples={8000}
+          dotRadius={0.2}
+          dotColor="#6366f1"
+          markerColor="#ec4899"
+          className="w-full h-full"
+        ></DottedMap>
+      </div>
+
+      {/* Page content with higher z-index */}
+      <PageLayout
+        title={title}
+        slug={slug}
+        description={description}
+        keywords={keywords}
+      >
+        <MDXRemote {...source} components={components} />
+      </PageLayout>
+    </div>
   );
 }
 
@@ -54,7 +71,9 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const source = fs.readFileSync(pageData.fullPath, "utf8");
   const { content, data } = matter(source, {
-    engines: { yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as object }
+    engines: {
+      yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as object,
+    },
   });
   const mdxSource = await serialize(content, { scope: data });
 
@@ -64,7 +83,7 @@ export const getStaticProps: GetStaticProps = async () => {
       slug: data.slug,
       description: data.description || "",
       keywords: data.keywords || [],
-      source: mdxSource
+      source: mdxSource,
     },
   };
 };
