@@ -3,6 +3,9 @@ module.exports = {
   output: 'export',
   distDir: './dist',
   pageExtensions: ["tsx"],
+  images: {
+    unoptimized: true
+  },
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     config.module.rules.push(
       {

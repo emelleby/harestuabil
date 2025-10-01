@@ -16,13 +16,13 @@ export const navigationItems: NavigationItem[] = [
     isActive: (pathname) => pathname === '/posts' || pathname.startsWith('/posts/')
   },
   {
-    href: '/program',
-    label: 'Program',
-    isActive: (pathname) => pathname === '/program'
+    href: '/services',
+    label: 'Tjenester',
+    isActive: (pathname) => pathname === '/services'
   },
   {
     href: '/about',
-    label: 'About',
+    label: 'Om oss',
     isActive: (pathname) => pathname === '/about'
   },
   {
