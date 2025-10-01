@@ -1,0 +1,5 @@
+**UX Expert Prompt**
+"Please review the completed PRD for the local Norwegian car mechanic website and create a comprehensive UI/UX specification. Focus on translating the Norwegian 'koselig' hospitality into digital design while maintaining professional credibility. The design should work within our established Shadcn/UI and Tailwind v4 technical foundation. Please include detailed wireframes, component libraries, and style guides. The focus will be the front page with the hero section, the blog page with the list of posts, individual posts, and the contact page."
+
+**Architect Prompt**
+"Please design the system architecture for the Norwegian car mechanic website based on the completed PRD. We have existing infrastructure with Next.js 14+, Shadcn/UI, Tailwind v4, and DecapCMS. Focus on optimizing for local Norwegian SEO, mobile performance, and seamless Netlify deployment while maintaining the warm, trustworthy user experience outlined in the PRD."
