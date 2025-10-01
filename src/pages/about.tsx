@@ -6,7 +6,7 @@ import fs from "fs";
 import yaml from "js-yaml";
 import { getPageBySlug } from "../lib/pages";
 import PageLayout from "../components/PageLayout";
-import { DottedMap } from "@/components/ui/dotted-map";
+import { DottedMap } from "@/components/ui/magicui/dotted-map";
 
 export type Props = {
   title: string;

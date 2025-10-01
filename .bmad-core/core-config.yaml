@@ -8,7 +8,7 @@ prd:
   prdShardedLocation: docs/prd
   epicFilePattern: epic-{n}*.md
 architecture:
-  architectureFile: docs/architecture.md
+  architectureFile: docs/architecture/brownfield-architecture.md
   architectureVersion: v4
   architectureSharded: false
   architectureShardedLocation: docs/architecture
@@ -17,6 +17,7 @@ devLoadAlwaysFiles:
   - docs/architecture/coding-standards.md
   - docs/architecture/tech-stack.md
   - docs/architecture/source-tree.md
+  - docs/qa/tdd-strategy.md
 devDebugLog: .ai/debug-log.md
 devStoryLocation: docs/stories
 slashPrefix: BMad
