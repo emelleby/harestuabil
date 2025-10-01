@@ -19,6 +19,7 @@ This document defines the coding standards and best practices for the Local Norw
 3. **Norwegian First**: Prioritize Norwegian language requirements and cultural context
 4. **Performance Conscious**: Consider Norwegian network conditions and device usage patterns
 5. **Accessibility by Default**: Ensure all code meets Norwegian accessibility standards
+6. **Dynamic theme colors**: Always use colors from the theme
 
 ### Development Approach
 

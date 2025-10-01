@@ -4,6 +4,7 @@ import OpenGraphMeta from "../components/meta/OpenGraphMeta";
 import TwitterCardMeta from "../components/meta/TwitterCardMeta";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/router";
+import { ValueProposition } from "../components/ValueProposition";
 
 export default function Index() {
   const router = useRouter();
@@ -63,6 +64,9 @@ export default function Index() {
             </div>
           </div>
         </section>
+
+        {/* Value Proposition Section */}
+        <ValueProposition />
       </main>
     </Layout>
   );

@@ -30,6 +30,19 @@ jest.mock("../components/ui/button", () => ({
   ),
 }));
 
+// Mock the ValueProposition component
+jest.mock("../components/ValueProposition", () => ({
+  ValueProposition: () => (
+    <section
+      data-testid="value-proposition"
+      aria-label="Fordeler med Harestua Bil"
+    >
+      <h2>Hvorfor velge oss?</h2>
+      <div>Value proposition content</div>
+    </section>
+  ),
+}));
+
 // Import after mocks
 import Index from "../pages/index";
 import { useRouter } from "next/router";
@@ -177,6 +190,26 @@ describe("Homepage Hero Section", () => {
 
       expect(mainElement).toBeInTheDocument();
       expect(heroSection).toBeInTheDocument();
+    });
+  });
+
+  describe("Value Proposition Section", () => {
+    it("should render ValueProposition component", () => {
+      const valuePropSection = screen.getByTestId("value-proposition");
+      expect(valuePropSection).toBeInTheDocument();
+    });
+
+    it("should have proper Norwegian language attributes", () => {
+      const valuePropSection = screen.getByTestId("value-proposition");
+      expect(valuePropSection).toHaveAttribute(
+        "aria-label",
+        "Fordeler med Harestua Bil"
+      );
+    });
+
+    it("should display Norwegian heading", () => {
+      const heading = screen.getByText("Hvorfor velge oss?");
+      expect(heading).toBeInTheDocument();
     });
   });
 });

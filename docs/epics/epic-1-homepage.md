@@ -41,7 +41,7 @@ Create a professional, trustworthy homepage that embodies Norwegian "koselig" ho
 
 ### Design System Integration
 - Use existing Shadcn/UI components and Tailwind v4 styling
-- Implement Norwegian color palette (deep blue #1e3a5f, warm brown #8b4513, accent orange #d2691e)
+- Implement Norwegian color palette from the theme (forground, background, etc)
 - Apply responsive design with mobile-first approach
 - Ensure WCAG AA accessibility compliance
 
@@ -105,7 +105,7 @@ Create a professional, trustworthy homepage that embodies Norwegian "koselig" ho
 
 ### Technical Considerations
 - Maintain existing component patterns for consistency
-- Use CSS variables for Norwegian brand colors
+- Use CSS variables for themed brand colors
 - Implement responsive images with Next.js Image component
 - Ensure proper Norwegian language attributes (lang="nb")
 
