@@ -21,7 +21,7 @@ export default function PageLayout({
   children,
 }: Props) {
   const pageUrl = `/${slug}`;
-  
+
   return (
     <Layout>
       <BasicMeta
@@ -30,29 +30,15 @@ export default function PageLayout({
         keywords={keywords}
         description={description}
       />
-      <TwitterCardMeta
-        url={pageUrl}
-        title={title}
-        description={description}
-      />
-      <OpenGraphMeta
-        url={pageUrl}
-        title={title}
-        description={description}
-      />
+      <TwitterCardMeta url={pageUrl} title={title} description={description} />
+      <OpenGraphMeta url={pageUrl} title={title} description={description} />
       <div className="container mx-auto px-4 py-8">
         <article className="max-w-4xl mx-auto">
           <header className="mb-8">
-            <h1 className="text-4xl font-bold mb-4 text-foreground">{title}</h1>
-            {description && (
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                {description}
-              </p>
-            )}
+            <h1 className="text-4xl font-bold">{title}</h1>
+            {description && <p className="">{description}</p>}
           </header>
-          <div className={`${styles.content} prose prose-lg max-w-none`}>
-            {children}
-          </div>
+          <div className={`${styles.content} content`}>{children}</div>
         </article>
       </div>
     </Layout>

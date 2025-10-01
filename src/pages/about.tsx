@@ -37,11 +37,9 @@ export default function About({
       {/* DottedMap as background element */}
       <div className="fixed inset-0 h-full z-0 opacity-20">
         <DottedMap
-          width={150}
-          height={75}
           mapSamples={8000}
-          dotRadius={0.2}
-          dotColor="#6366f1"
+          dotRadius={0.15}
+          dotColor="#53fdec"
           markerColor="#ec4899"
           className="w-full h-full"
         ></DottedMap>
