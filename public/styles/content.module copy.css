@@ -1,0 +1,507 @@
+/* Base content styles */
+.content {
+  color: var(--color-foreground);
+  font-weight: 300;
+  line-height: 1.625;
+  font-family: "Ubuntu", sans-serif;
+}
+
+/* Typography */
+.content :global(h1) {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--color-foreground);
+  line-height: 1.2;
+}
+
+.content :global(h2) {
+  font-size: 1.875rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: var(--color-foreground);
+  position: relative;
+  line-height: 1.25;
+}
+
+.content :global(h3) {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: var(--color-foreground);
+  line-height: 1.3;
+}
+
+.content :global(h4) {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-foreground);
+  line-height: 1.4;
+}
+
+.content :global(h5) {
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-foreground);
+  line-height: 1.4;
+}
+
+.content :global(h6) {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 0.75rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-foreground);
+  line-height: 1.5;
+}
+
+/* Heading anchors for desktop */
+@media (min-width: 769px) {
+  .content :global(h2),
+  .content :global(h3),
+  .content :global(h4),
+  .content :global(h5) {
+    position: relative;
+  }
+
+  .content :global(h2)::before {
+    content: "#";
+    position: absolute;
+    margin-left: -1.5em;
+    font-weight: 300;
+    font-size: 1.5rem;
+    color: var(--color-muted-foreground);
+    display: block;
+  }
+}
+
+/* Paragraphs */
+.content :global(p) {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--color-foreground);
+  line-height: 1.7;
+}
+
+.content :global(p):first-child {
+  margin-top: 0;
+}
+
+/* Links */
+.content :global(a) {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-decoration-color: rgba(var(--color-primary), 0.5);
+  transition: text-decoration-color 0.2s ease;
+}
+
+.content :global(a):hover {
+  text-decoration-color: var(--color-primary);
+}
+
+/* Lists */
+.content :global(ul),
+.content :global(ol) {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  padding-left: 2rem;
+  color: var(--color-foreground);
+}
+
+.content :global(li) {
+  margin-bottom: 0.5rem;
+  line-height: 1.625;
+}
+
+.content :global(li):last-child {
+  margin-bottom: 0;
+}
+
+/* Nested lists */
+.content :global(li) :global(ul),
+.content :global(li) :global(ol) {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+
+/* List item markers */
+.content :global(ul) {
+  list-style-type: disc;
+}
+
+.content :global(ol) {
+  list-style-type: decimal;
+}
+
+/* Blockquotes */
+.content :global(blockquote) {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-left: 4px solid rgba(var(--color-primary), 0.3);
+  font-style: italic;
+  color: var(--color-muted-foreground);
+  position: relative;
+}
+
+.content :global(blockquote)::before {
+  content: '"';
+  position: absolute;
+  top: -0.2em;
+  left: 0.2em;
+  font-size: 4em;
+  font-family: Georgia, serif;
+  color: var(--color-muted);
+  z-index: -1;
+  opacity: 0.5;
+}
+
+.content :global(blockquote) :global(p) {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* Horizontal rules */
+.content :global(hr) {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  border: 0;
+  border-top: 1px solid var(--color-border);
+}
+
+/* Code */
+.content :global(code) {
+  background-color: rgba(var(--color-muted), 0.5);
+  color: var(--color-foreground);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-family: "Ubuntu Mono", monospace;
+}
+
+/* Inline code */
+.content :global(p) > :global(code),
+.content :global(li) > :global(code) {
+  font-size: 0.875em;
+}
+
+/* Code blocks */
+.content :global(pre) {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: rgba(var(--color-muted), 0.5);
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+}
+
+.content :global(pre) :global(code) {
+  background-color: transparent;
+  padding: 0;
+  font-size: 0.875rem;
+  line-height: 1.625;
+  font-family: "Ubuntu Mono", monospace;
+}
+
+/* Tables */
+.content :global(table) {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.content :global(thead) {
+  background-color: rgba(var(--color-muted), 0.5);
+}
+
+.content :global(th) {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--color-foreground);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.content :global(td) {
+  padding: 0.75rem 1rem;
+  color: var(--color-foreground);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.content :global(tbody) :global(tr):last-child :global(td) {
+  border-bottom: none;
+}
+
+.content :global(tbody) :global(tr):hover {
+  background-color: rgba(var(--color-muted), 0.3);
+}
+
+/* Responsive table wrapper */
+.content :global(.table-wrapper) {
+  overflow-x: auto;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .content :global(.table-wrapper) {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+/* Images */
+.content :global(img) {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  max-width: 100%;
+  height: auto;
+}
+
+.content :global(img[alt*="left"]) {
+  float: left;
+  margin-right: 1rem;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.content :global(img[alt*="right"]) {
+  float: right;
+  margin-left: 1rem;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.content :global(img[alt*="center"]) {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+/* Figure and caption */
+.content :global(figure) {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.content :global(figcaption) {
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--color-muted-foreground);
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+/* Inline elements */
+.content :global(strong) {
+  font-weight: 600;
+  color: var(--color-foreground);
+}
+
+.content :global(em) {
+  font-style: italic;
+}
+
+.content :global(mark) {
+  background-color: rgba(254, 240, 138, 0.7);
+  color: var(--color-foreground);
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+}
+
+.dark .content :global(mark) {
+  background-color: rgba(113, 63, 18, 0.3);
+}
+
+.content :global(del) {
+  text-decoration: line-through;
+  color: var(--color-muted-foreground);
+}
+
+.content :global(ins) {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--color-primary);
+}
+
+.content :global(abbr[title]) {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: var(--color-muted-foreground);
+  cursor: help;
+}
+
+/* Keyboard input */
+.content :global(kbd) {
+  background-color: var(--color-muted);
+  border: 1px solid var(--color-border);
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-family: "Ubuntu Mono", monospace;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+/* Superscript and subscript */
+.content :global(sup),
+.content :global(sub) {
+  font-size: 0.75rem;
+  color: var(--color-muted-foreground);
+}
+
+.content :global(sup) {
+  vertical-align: super;
+}
+
+.content :global(sub) {
+  vertical-align: sub;
+}
+
+/* Details and summary */
+.content :global(details) {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.content :global(summary) {
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+  outline: none;
+}
+
+.content :global(summary)::-webkit-details-marker {
+  display: none;
+}
+
+.content :global(summary)::before {
+  content: "▶";
+  display: inline-block;
+  margin-right: 0.5rem;
+  transition: transform 0.2s ease;
+}
+
+.content :global(details[open]) > :global(summary)::before {
+  transform: rotate(90deg);
+}
+
+/* Definition lists */
+.content :global(dl) {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.content :global(dt) {
+  font-weight: 600;
+  color: var(--color-foreground);
+  margin-bottom: 0.25rem;
+}
+
+.content :global(dd) {
+  margin-left: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-muted-foreground);
+}
+
+/* Footnotes */
+.content :global(.footnote-ref) {
+  font-size: 0.75rem;
+  vertical-align: super;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.content :global(.footnotes) {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+  font-size: 0.875rem;
+  color: var(--color-muted-foreground);
+}
+
+.content :global(.footnotes) :global(ol) {
+  padding-left: 1.5rem;
+}
+
+/* Task lists */
+.content :global(.task-list-item) {
+  list-style: none;
+  margin-left: 0;
+}
+
+.content :global(.task-list-item) :global(input) {
+  margin-right: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .content {
+    font-size: 0.875rem;
+  }
+  
+  .content :global(h1) {
+    font-size: 1.875rem;
+  }
+  
+  .content :global(h2) {
+    font-size: 1.5rem;
+  }
+  
+  .content :global(h3) {
+    font-size: 1.25rem;
+  }
+  
+  .content :global(table) {
+    font-size: 0.875rem;
+  }
+  
+  .content :global(th),
+  .content :global(td) {
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+/* Print styles */
+@media print {
+  .content {
+    color: black;
+  }
+  
+  .content :global(a) {
+    color: black;
+    text-decoration: none;
+  }
+  
+  .content :global(pre),
+  .content :global(blockquote) {
+    border: 1px solid #d1d5db;
+  }
+  
+  .content :global(img) {
+    max-width: 100%;
+    break-inside: avoid;
+  }
+}
