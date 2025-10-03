@@ -16,9 +16,9 @@ export const navigationItems: NavigationItem[] = [
     isActive: (pathname) => pathname === '/posts' || pathname.startsWith('/posts/')
   },
   {
-    href: '/services',
+    href: '/tjenester',
     label: 'Tjenester',
-    isActive: (pathname) => pathname === '/services' || pathname.startsWith('/tjenester/')
+    isActive: (pathname) => pathname === '/tjenester' || pathname.startsWith('/tjenester/')
   },
   {
     href: '/about',
