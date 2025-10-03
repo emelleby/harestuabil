@@ -186,16 +186,16 @@ test("should calculate service duration in hours and minutes", () => {
 ### Commands
 ```bash
 # Run all tests
-npm test
+pnpm test
 
 # Run tests in watch mode
-npm test -- --watch
+pnpm test -- --watch
 
 # Run tests with coverage
-npm test -- --coverage
+pnpm test -- --coverage
 
 # Run specific test file
-npm test -- pagination.test.ts
+pnpm test -- pagination.test.ts
 ```
 
 ### Coverage Reports

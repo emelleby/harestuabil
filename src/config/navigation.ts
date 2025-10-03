@@ -7,12 +7,12 @@ export interface NavigationItem {
 export const navigationItems: NavigationItem[] = [
   {
     href: '/',
-    label: 'Home',
+    label: 'Hjem',
     isActive: (pathname) => pathname === '/'
   },
   {
     href: '/posts',
-    label: 'Blog',
+    label: 'Blogg',
     isActive: (pathname) => pathname === '/posts' || pathname.startsWith('/posts/')
   },
   {
@@ -27,12 +27,12 @@ export const navigationItems: NavigationItem[] = [
   },
   {
     href: '/partners',
-    label: 'Partners',
+    label: 'Partnere',
     isActive: (pathname) => pathname === '/partners'
   },
   {
     href: '/contact',
-    label: 'Contact',
+    label: 'Kontakt',
     isActive: (pathname) => pathname === '/contact'
   }
 ];

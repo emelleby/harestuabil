@@ -5,6 +5,7 @@ import TwitterCardMeta from "../components/meta/TwitterCardMeta";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/router";
 import { ValueProposition } from "../components/ValueProposition";
+import { TrustIndicators } from "../components/TrustIndicators";
 
 export default function Index() {
   const router = useRouter();
@@ -25,7 +26,7 @@ export default function Index() {
           {/* Background overlay for better text readability */}
           <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"></div>
 
-          {/* Content */}
+          {/* Content HERO*/}
           <div className="relative z-10 container mx-auto px-4 py-8 md:py-16 lg:py-24">
             <div className="max-w-4xl mx-auto text-center">
               <h1
@@ -67,6 +68,9 @@ export default function Index() {
 
         {/* Value Proposition Section */}
         <ValueProposition />
+
+        {/* Trust Indicators Section */}
+        <TrustIndicators />
       </main>
     </Layout>
   );
