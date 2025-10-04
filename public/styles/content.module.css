@@ -1,8 +1,9 @@
+/* @import "tailwindcss"; */
 @reference "tailwindcss";
 
 /* @layer base {
   .content h3 {
-    @apply text-xl font-medium mt-4 text-foreground;
+    @apply text-3xl font-medium mt-4 text-foreground;
   }
 } */
 
@@ -22,10 +23,7 @@
   margin: 0.5rem 0 0 0;
 }
 
-.content a {
-  color: blue;
-  text-decoration: underline;
-}
+
 
 .content h1 {
   font-size: 2.25rem;
@@ -157,3 +155,12 @@
     position: relative;
   }
 }
+
+
+  .content a {
+    text-decoration: underline;
+    text-decoration-color: #0891b2;
+    text-decoration-thickness: 2px;
+    transition: text-decoration-color 0.2s ease;
+  }
+

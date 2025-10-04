@@ -11,6 +11,7 @@ export type ServiceContent = {
   readonly name: string;
   readonly description: string;
   readonly overview: string;
+  readonly image?: string;
   readonly benefits: string[];
   readonly process: string[];
   readonly pricing: {
@@ -103,6 +104,7 @@ export function convertToServiceData(serviceContent: ServiceContent): ServiceDat
     name: serviceContent.name,
     description: serviceContent.description,
     overview: serviceContent.overview,
+    image: serviceContent.image,
     benefits: serviceContent.benefits,
     process: serviceContent.process,
     pricing: serviceContent.pricing,

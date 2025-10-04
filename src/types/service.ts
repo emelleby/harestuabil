@@ -2,6 +2,7 @@ export interface ServiceData {
   name: string;
   description: string;
   overview: string;
+  image?: string;
   benefits: string[];
   process: string[];
   pricing: {

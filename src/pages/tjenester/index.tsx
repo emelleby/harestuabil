@@ -4,10 +4,10 @@ import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import matter from "gray-matter";
 import fs from "fs";
 import yaml from "js-yaml";
-import Link from "next/link";
 import { getPageBySlug } from "../../lib/pages";
 import { fetchServiceContent, ServiceContent } from "../../lib/services";
 import PageLayout from "../../components/PageLayout";
+import ServiceCard from "../../components/ServiceCard";
 
 export type Props = {
   title: string;
@@ -71,29 +71,7 @@ export default function Tjenester({
         <div className="mt-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {services.map((service) => (
-              <Link
-                key={service.slug}
-                href={`/tjenester/${service.slug}`}
-                className="block border border-border rounded-lg p-6 hover:shadow-lg transition-shadow"
-              >
-                <h2 className="text-2xl font-semibold mb-3 text-foreground">
-                  {service.name}
-                </h2>
-                <p className="text-muted-foreground mb-4">
-                  {service.description}
-                </p>
-                <p className="text-sm text-muted-foreground mb-4">
-                  {service.overview}
-                </p>
-                <div className="flex justify-between items-center">
-                  <span className="text-lg font-medium text-foreground">
-                    {service.pricing.description}
-                  </span>
-                  <span className="bg-primary text-primary-foreground px-4 py-2 rounded cursor-pointer">
-                    Les mer
-                  </span>
-                </div>
-              </Link>
+              <ServiceCard key={service.slug} service={service} />
             ))}
           </div>
         </div>
