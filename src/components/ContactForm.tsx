@@ -10,7 +10,16 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Field } from "@/components/ui/field";
+import {
+  Field,
+  FieldContent,
+  FieldDescription,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+  FieldSet,
+  FieldTitle,
+} from "@/components/ui/field";
 import { Label } from "@/components/ui/label";
 import {
   ContactFormData,
@@ -330,7 +339,57 @@ export function ContactForm() {
         )}
       </Field>
 
-      <Field>
+      <Field orientation="horizontal">
+        <Checkbox
+          id="personvernAccept"
+          name="personvernAccept"
+          checked={state.data.personvernAccept}
+          onCheckedChange={(checked) =>
+            handleFieldChange("personvernAccept", !!checked)
+          }
+          className={state.errors.personvernAccept ? "border-red-500" : ""}
+          required
+        />
+        <FieldContent>
+          <FieldLabel htmlFor="personvernAccept">
+            Jeg aksepterer <span className="text-red-600">*</span>
+          </FieldLabel>
+          <FieldDescription>
+            <FieldError>
+              {state.errors.personvernAccept && (
+                <p>{state.errors.personvernAccept}</p>
+              )}
+            </FieldError>
+            Aksept om at mine personopplysninger behandles i henhold til{" "}
+            <a href="/personvern" className="text-blue-600 hover:underline">
+              personvernerklæringen
+            </a>
+          </FieldDescription>
+        </FieldContent>
+      </Field>
+
+      <FieldLabel htmlFor="kubernetes-r2h">
+        <Field orientation="horizontal">
+          <Checkbox
+            id="personvernAccept"
+            name="personvernAccept"
+            checked={state.data.personvernAccept}
+            onCheckedChange={(checked) =>
+              handleFieldChange("personvernAccept", !!checked)
+            }
+            className={state.errors.personvernAccept ? "border-red-500" : ""}
+            required
+          />
+          <FieldContent>
+            <FieldTitle>Kubernetes</FieldTitle>
+            <FieldDescription>
+              Run GPU workloads on a K8s configured cluster.
+            </FieldDescription>
+          </FieldContent>
+        </Field>
+      </FieldLabel>
+
+      {/* <Field>
         <div className="flex items-start space-x-2">
           <Checkbox
             id="personvernAccept"
@@ -355,7 +414,7 @@ export function ContactForm() {
             {state.errors.personvernAccept}
           </p>
         )}
-      </Field>
+      </Field> */}
 
       {state.submitError && (
         <div className="bg-red-50 border border-red-200 rounded-lg p-4">
