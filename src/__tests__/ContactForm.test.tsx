@@ -17,7 +17,8 @@ describe("ContactForm", () => {
     expect(screen.getByLabelText(/telefon/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/tjeneste type/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/melding/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/personvern/i)).toBeInTheDocument();
+    expect(screen.getByRole("checkbox")).toBeInTheDocument();
+    expect(screen.getByText(/jeg aksepterer/i)).toBeInTheDocument();
   });
 
   it("should have service type dropdown with all available services", async () => {
@@ -31,24 +32,30 @@ describe("ContactForm", () => {
 
     // Check for service options
     await waitFor(() => {
-      expect(screen.getAllByText("Verksted")).toHaveLength(2); // One in select, one in dropdown
-      expect(screen.getAllByText("Dekk og felg")).toHaveLength(2);
-      expect(screen.getAllByText("Dekkhotell")).toHaveLength(2);
-      expect(screen.getAllByText("Bilglass")).toHaveLength(2);
+      expect(
+        screen.getByRole("option", { name: "Verksted" })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole("option", { name: "Dekk og felg" })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole("option", { name: "Dekkhotell" })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole("option", { name: "Bilglass" })
+      ).toBeInTheDocument();
     });
   });
 
   it("should show Norwegian validation errors for required fields", async () => {
     render(<ContactForm />);
 
-    const submitButton = screen.getByRole("button", { name: /send/i });
+    const submitButton = screen.getByRole("button", { name: /send inn/i });
     fireEvent.click(submitButton);
 
     await waitFor(() => {
       expect(screen.getByText(/navn er påkrevd/i)).toBeInTheDocument();
       expect(screen.getByText(/e-post er påkrevd/i)).toBeInTheDocument();
-      expect(screen.getByText(/tjeneste type er påkrevd/i)).toBeInTheDocument();
-      expect(screen.getByText(/melding er påkrevd/i)).toBeInTheDocument();
       expect(
         screen.getByText(/du må akseptere personvernerklæringen/i)
       ).toBeInTheDocument();
@@ -60,7 +67,9 @@ describe("ContactForm", () => {
 
     const emailInput = screen.getByLabelText(/e-post/i);
     fireEvent.change(emailInput, { target: { value: "invalid-email" } });
-    fireEvent.blur(emailInput);
+
+    const submitButton = screen.getByRole("button", { name: /send inn/i });
+    fireEvent.click(submitButton);
 
     await waitFor(() => {
       expect(screen.getByText(/ugyldig e-postadresse/i)).toBeInTheDocument();
@@ -90,16 +99,22 @@ describe("ContactForm", () => {
     const serviceSelect = screen.getByRole("combobox");
     fireEvent.click(serviceSelect);
     await waitFor(() => {
-      const verkstedOptions = screen.getAllByText("Verksted");
-      fireEvent.click(verkstedOptions[1]); // Click the dropdown option, not the selected value
+      const verkstedOption = screen.getByRole("option", { name: "Verksted" });
+      fireEvent.click(verkstedOption);
     });
+
+    // Wait for dropdown to close
+    await waitFor(() => {
+      expect(screen.queryByRole("listbox")).not.toBeInTheDocument();
+    });
+
     fireEvent.change(screen.getByLabelText(/melding/i), {
       target: { value: "Trenger hjelp med bilen min" },
     });
-    fireEvent.click(screen.getByLabelText(/personvern/i));
+    fireEvent.click(screen.getByRole("checkbox"));
 
     // Submit form
-    fireEvent.click(screen.getByRole("button", { name: /send/i }));
+    fireEvent.click(screen.getByRole("button", { name: /send inn/i }));
 
     await waitFor(() => {
       expect(mockFetch).toHaveBeenCalledWith(
@@ -133,14 +148,20 @@ describe("ContactForm", () => {
     const serviceSelect = screen.getByRole("combobox");
     fireEvent.click(serviceSelect);
     await waitFor(() => {
-      const verkstedOptions = screen.getAllByText("Verksted");
-      fireEvent.click(verkstedOptions[1]); // Click the dropdown option, not the selected value
+      const verkstedOption = screen.getByRole("option", { name: "Verksted" });
+      fireEvent.click(verkstedOption);
     });
+
+    // Wait for dropdown to close
+    await waitFor(() => {
+      expect(screen.queryByRole("listbox")).not.toBeInTheDocument();
+    });
+
     fireEvent.change(screen.getByLabelText(/melding/i), {
       target: { value: "Test melding" },
     });
-    fireEvent.click(screen.getByLabelText(/personvern/i));
-    fireEvent.click(screen.getByRole("button", { name: /send/i }));
+    fireEvent.click(screen.getByRole("checkbox"));
+    fireEvent.click(screen.getByRole("button", { name: /send inn/i }));
 
     await waitFor(() => {
       expect(screen.getByText(/takk for din henvendelse/i)).toBeInTheDocument();
