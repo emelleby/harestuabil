@@ -24,9 +24,10 @@ export default function Tjenester({ services }: TjenesterProps) {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {services.map((service) => (
-            <div
+            <Link
               key={service.slug}
-              className="border border-border rounded-lg p-6 hover:shadow-lg transition-shadow"
+              href={`/tjenester/${service.slug}`}
+              className="block border border-border rounded-lg p-6 hover:shadow-lg transition-shadow"
             >
               <h2 className="text-2xl font-semibold mb-3 text-foreground">
                 {service.name}
@@ -41,14 +42,13 @@ export default function Tjenester({ services }: TjenesterProps) {
                 <span className="text-lg font-medium text-foreground">
                   {service.pricing.description}
                 </span>
-                <Link
-                  href={`/tjenester/${service.slug}`}
-                  className="bg-primary text-primary-foreground px-4 py-2 rounded hover:bg-primary/90 transition-colors"
+                <span
+                  className="bg-primary text-primary-foreground px-4 py-2 rounded cursor-pointer"
                 >
                   Les mer
-                </Link>
+                </span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
