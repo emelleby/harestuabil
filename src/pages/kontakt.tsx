@@ -6,6 +6,7 @@ import fs from "fs";
 import yaml from "js-yaml";
 import { getPageBySlug } from "../lib/pages";
 import PageLayout from "../components/PageLayout";
+import { ContactForm } from "../components/ContactForm";
 
 export type Props = {
   title: string;
@@ -35,6 +36,11 @@ export default function Contact({
       keywords={keywords}
     >
       <MDXRemote {...source} components={components} />
+
+      {/* Contact Form */}
+      <div className="mt-12">
+        <ContactForm />
+      </div>
     </PageLayout>
   );
 }
@@ -50,7 +56,9 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const source = fs.readFileSync(pageData.fullPath, "utf8");
   const { content, data } = matter(source, {
-    engines: { yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as object }
+    engines: {
+      yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as object,
+    },
   });
   const mdxSource = await serialize(content, { scope: data });
 
@@ -60,7 +68,7 @@ export const getStaticProps: GetStaticProps = async () => {
       slug: data.slug,
       description: data.description || "",
       keywords: data.keywords || [],
-      source: mdxSource
+      source: mdxSource,
     },
   };
 };
