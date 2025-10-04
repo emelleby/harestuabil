@@ -23,7 +23,18 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import {
+  Field,
+  FieldContent,
+  FieldDescription,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+  FieldSet,
+  FieldTitle,
+} from "@/components/ui/field";
 import { ServiceType } from "@/types/service";
+import Link from "next/link";
 
 // Norwegian service type labels
 const SERVICE_LABELS: Record<ServiceType, string> = {
@@ -252,7 +263,7 @@ export function ContactForm() {
           )}
         />
 
-        <FormField
+        {/* <FormField
           control={form.control}
           name="personvernAccept"
           render={({ field }) => (
@@ -279,6 +290,31 @@ export function ContactForm() {
                 <FormMessage />
               </div>
             </FormItem>
+          )}
+        /> */}
+
+        <FormField
+          control={form.control}
+          name="personvernAccept"
+          render={({ field }) => (
+            <Field orientation="horizontal">
+              <Checkbox
+                checked={field.value}
+                onCheckedChange={field.onChange}
+              />
+              <FieldContent>
+                <FieldLabel htmlFor="personvernAccept">
+                  Jeg aksepterer <span className="text-red-600">*</span>
+                </FieldLabel>
+                <FieldDescription>
+                  <FieldError>
+                    <FormMessage />
+                  </FieldError>
+                  Aksept om at mine personopplysninger behandles i henhold til{" "}
+                  <Link href="/personvern">personvernerklæringen</Link>
+                </FieldDescription>
+              </FieldContent>
+            </Field>
           )}
         />
 
