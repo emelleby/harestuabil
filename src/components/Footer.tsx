@@ -100,7 +100,7 @@ export function Footer(): React.ReactElement {
               <div className="flex items-center space-x-3">
                 <Clock className="h-4 w-4 text-primary" />
                 <div className="text-sm">
-                  <p>Man-Fre: 07:00 - 16:00</p>
+                  <p>Man-Fre: 08:00 - 16:00</p>
                   <p>Lørdag: Stengt</p>
                   <p>Søndag: Stengt</p>
                 </div>

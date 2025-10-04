@@ -37,20 +37,13 @@ export const navigationItems: NavigationItem[] = [
   }
 ];
 
-// Debug function to check navigation consistency
-export const debugNavigation = () => {
-  if (typeof window !== 'undefined') {
-    console.log('=== Navigation Debug Info ===');
-    console.log('Current pathname:', window.location.pathname);
-    
-    navigationItems.forEach(item => {
-      const isActive = item.isActive
-        ? item.isActive(window.location.pathname)
-        : window.location.pathname === item.href;
-      
-      console.log(`Nav item: ${item.label} -> ${item.href} (Active: ${isActive})`);
-    });
-    
-    console.log('=== End Navigation Debug ===');
-  }
-};
+// // Debug function to check navigation consistency
+// export const debugNavigation = () => {
+//   if (typeof window !== 'undefined') {
+//     navigationItems.forEach(item => {
+//       const isActive = item.isActive
+//         ? item.isActive(window.location.pathname)
+//         : window.location.pathname === item.href;
+//     });
+//   }
+// };
