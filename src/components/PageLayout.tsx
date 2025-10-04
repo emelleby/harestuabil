@@ -4,6 +4,7 @@ import Layout from "./Layout";
 import BasicMeta from "./meta/BasicMeta";
 import OpenGraphMeta from "./meta/OpenGraphMeta";
 import TwitterCardMeta from "./meta/TwitterCardMeta";
+import { LightRays } from "./ui/light-rays";
 
 type Props = {
   title: string;
@@ -38,7 +39,17 @@ export default function PageLayout({
             <h1 className="text-4xl font-bold">{title}</h1>
             {description && <p className="">{description}</p>}
           </header>
-          <div className={`${styles.content} content`}>{children}</div>
+          <div className={`${styles.content} content`}>
+            <LightRays
+              className=""
+              count={20}
+              color="rgba(210,105,30, 0.05)"
+              blur={15}
+              speed={16}
+              length="90vh"
+            />
+            {children}
+          </div>
         </article>
       </div>
     </Layout>

@@ -7,6 +7,7 @@ import yaml from "js-yaml";
 import { getPageBySlug } from "../lib/pages";
 import PageLayout from "../components/PageLayout";
 import { DottedMap } from "@/components/ui/magicui/dotted-map";
+import { LightRays } from "@/components/ui/light-rays";
 
 export type Props = {
   title: string;
@@ -35,15 +36,15 @@ export default function About({
   return (
     <div className="relative min-h-screen z-10">
       {/* DottedMap as background element */}
-      <div className="fixed inset-0 h-full z-0 opacity-20">
-        <DottedMap
+      {/* <div className="fixed inset-0 h-full z-0 opacity-20">
+        <
           mapSamples={8000}
           dotRadius={0.15}
           dotColor="#53fdec"
           markerColor="#ec4899"
           className="w-full h-full"
-        ></DottedMap>
-      </div>
+        />
+      </div> */}
 
       {/* Page content with higher z-index */}
       <PageLayout
@@ -52,6 +53,14 @@ export default function About({
         description={description}
         keywords={keywords}
       >
+        {/* <LightRays
+          className=""
+          count={20}
+          color="rgba(210,105,30, 0.05)"
+          blur={15}
+          speed={16}
+          length="90vh"
+        /> */}
         <MDXRemote {...source} components={components} />
       </PageLayout>
     </div>
