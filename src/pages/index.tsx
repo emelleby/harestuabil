@@ -47,7 +47,7 @@ export default function Index() {
                   className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 shadow-lg"
                   aria-label="Kontakt oss for å bestille time eller få mer informasjon"
                   tabIndex={0}
-                  onClick={() => router.push("/contact")}
+                  onClick={() => router.push("/kontakt")}
                 >
                   Kontakt oss
                 </Button>
@@ -57,7 +57,7 @@ export default function Index() {
                   className="border-primary text-primary dark:hover:bg-primary/10 hover:text-primary px-8 py-3 bg-background/80 backdrop-blur-sm shadow-lg"
                   aria-label="Se oversikt over våre tjenester"
                   tabIndex={0}
-                  onClick={() => router.push("/services")}
+                  onClick={() => router.push("/tjenester")}
                 >
                   Våre tjenester
                 </Button>

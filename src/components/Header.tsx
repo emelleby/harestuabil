@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { BrandLogo } from "./BrandLogo";
 import { DesktopNavigation } from "./DesktopNavigation";
 import { ThemeToggle } from "./ThemeToggle";
-import { navigationItems } from "@/config/navigation";
+import { navigationItems, debugNavigation } from "@/config/navigation";
 export function Header(): React.ReactElement {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
@@ -45,6 +45,11 @@ export function Header(): React.ReactElement {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isMobileMenuOpen]);
+
+  // Debug navigation when route changes
+  useEffect(() => {
+    debugNavigation();
+  }, [router.pathname]);
 
   return (
     <>

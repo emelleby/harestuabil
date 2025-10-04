@@ -21,18 +21,36 @@ export const navigationItems: NavigationItem[] = [
     isActive: (pathname) => pathname === '/tjenester' || pathname.startsWith('/tjenester/')
   },
   {
-    href: '/about',
+    href: '/om-oss',
     label: 'Om oss',
-    isActive: (pathname) => pathname === '/about'
+    isActive: (pathname) => pathname === '/om-oss'
   },
   {
-    href: '/partners',
+    href: '/partnere',
     label: 'Partnere',
-    isActive: (pathname) => pathname === '/partners'
+    isActive: (pathname) => pathname === '/partnere'
   },
   {
-    href: '/contact',
+    href: '/kontakt',
     label: 'Kontakt',
-    isActive: (pathname) => pathname === '/contact'
+    isActive: (pathname) => pathname === '/kontakt'
   }
 ];
+
+// Debug function to check navigation consistency
+export const debugNavigation = () => {
+  if (typeof window !== 'undefined') {
+    console.log('=== Navigation Debug Info ===');
+    console.log('Current pathname:', window.location.pathname);
+    
+    navigationItems.forEach(item => {
+      const isActive = item.isActive
+        ? item.isActive(window.location.pathname)
+        : window.location.pathname === item.href;
+      
+      console.log(`Nav item: ${item.label} -> ${item.href} (Active: ${isActive})`);
+    });
+    
+    console.log('=== End Navigation Debug ===');
+  }
+};

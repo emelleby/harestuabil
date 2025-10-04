@@ -51,19 +51,19 @@ export function Footer(): React.ReactElement {
                 Hjem
               </Link>
               <Link
-                href="/services"
+                href="/tjenester"
                 className="block text-sm hover:text-primary transition-colors"
               >
                 Tjenester
               </Link>
               <Link
-                href="/about"
+                href="/om-oss"
                 className="block text-sm hover:text-primary transition-colors"
               >
                 Om oss
               </Link>
               <Link
-                href="/contact"
+                href="/kontakt"
                 className="block text-sm hover:text-primary transition-colors"
               >
                 Kontakt
@@ -119,18 +119,7 @@ export function Footer(): React.ReactElement {
               <p>Org.nr: 998 828 309 MVA</p>
             </div>
             <div className="flex space-x-6 text-sm">
-              <Link
-                href="/privacy"
-                className="hover:text-primary transition-colors"
-              >
-                Personvern
-              </Link>
-              <Link
-                href="/terms"
-                className="hover:text-primary transition-colors"
-              >
-                Betingelser
-              </Link>
+              {/* Privacy and Terms pages will be added later */}
             </div>
           </div>
         </div>
