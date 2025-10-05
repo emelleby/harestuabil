@@ -9,9 +9,8 @@
 
 
 .content {
-  font-family: "Ubuntu", sans-serif;
+  font-family: "Inter", sans-serif;
   color: var(--color-foreground); /* Use semantic theme color instead of hardcoded #222 */
-  font-weight: 300;
 }
 
 .content time {
