@@ -222,7 +222,7 @@ export function ContactForm() {
               name='tjenesteType'
               render={({ field }) => (
                 <Field orientation='responsive'>
-                  <FieldLabel htmlFor='tjenesteType'>Tjeneste type</FieldLabel>
+                  <FieldLabel htmlFor='tjenesteType'>Tjenestetype</FieldLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <SelectTrigger id='tjenesteType'>
                       <SelectValue placeholder='Velg tjeneste' />
