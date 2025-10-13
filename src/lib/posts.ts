@@ -10,6 +10,8 @@ export type PostContent = {
   readonly title: string;
   readonly slug: string;
   readonly tags?: string[];
+  readonly image?: string;
+  readonly description?: string;
   readonly fullPath: string;
 };
 

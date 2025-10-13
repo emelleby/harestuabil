@@ -51,6 +51,7 @@ Create an engaging, professional blog section that showcases automotive expertis
 
 ### Individual Blog Post Template
 - Clean, readable typography optimized for Norwegian language
+- Line width is 73 chars
 - Proper heading hierarchy and content structure
 - Image support via MDX
 - Author information and publication date display
