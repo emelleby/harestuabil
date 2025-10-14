@@ -1,5 +1,4 @@
-import React from 'react'
-import { TagContent } from '../../lib/tags'
+import type { TagContent } from '../../lib/tags'
 
 type Props = {
   tags: TagContent[]
@@ -8,34 +7,45 @@ type Props = {
 }
 
 export default function BlogFilter({ tags, selected = null, onSelect }: Props) {
-  return (
-    <div className="flex flex-wrap gap-2 mb-6" role="toolbar" aria-label="Blog filters">
-      <button
-        type="button"
-        className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
-          selected === null ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:bg-muted/80'
-        }`}
-        aria-pressed={selected === null}
-        onClick={() => onSelect(null)}
-      >
-        Alle
-      </button>
+  // Filter to show only Norwegian car mechanic categories first
+  const norwegianCategories = ['vedlikehold', 'tips', 'nyheter', 'sesongguide']
+  const priorityTags = tags.filter((tag) => norwegianCategories.includes(tag.slug))
+  const otherTags = tags.filter((tag) => !norwegianCategories.includes(tag.slug))
+  const sortedTags = [...priorityTags, ...otherTags]
 
-      {tags.map((t) => (
+  return (
+    <div className="mb-6">
+      <h3 className="text-sm font-medium text-foreground mb-3">Filtrer artikler:</h3>
+      <div className="flex flex-wrap gap-2" role="toolbar" aria-label="Blogg kategorier">
         <button
-          key={t.slug}
           type="button"
-          className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
-            selected === t.slug
-              ? 'bg-primary text-primary-foreground'
-              : 'bg-muted text-muted-foreground hover:bg-muted/80'
+          className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+            selected === null
+              ? 'bg-primary text-primary-foreground shadow-md'
+              : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground'
           }`}
-          aria-pressed={selected === t.slug}
-          onClick={() => onSelect(t.slug)}
+          aria-pressed={selected === null}
+          onClick={() => onSelect(null)}
         >
-          {t.name}
+          Alle artikler
         </button>
-      ))}
+
+        {sortedTags.map((tag) => (
+          <button
+            key={tag.slug}
+            type="button"
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+              selected === tag.slug
+                ? 'bg-primary text-primary-foreground shadow-md'
+                : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground'
+            }`}
+            aria-pressed={selected === tag.slug}
+            onClick={() => onSelect(tag.slug)}
+          >
+            {tag.name}
+          </button>
+        ))}
+      </div>
     </div>
   )
 }
