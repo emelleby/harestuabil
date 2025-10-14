@@ -1,9 +1,9 @@
-import Link from "next/link";
-import { TagContent } from "../lib/tags";
+import Link from 'next/link'
+import type { TagContent } from '../../lib/tags'
 
 type Props = {
-  tag: TagContent;
-};
+  tag: TagContent
+}
 export default function TagButton({ tag }: Props) {
   return (
     <Link
@@ -12,5 +12,5 @@ export default function TagButton({ tag }: Props) {
     >
       {tag.name}
     </Link>
-  );
+  )
 }

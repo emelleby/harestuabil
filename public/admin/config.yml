@@ -140,6 +140,16 @@ collections:
         displayFields:
           - "authors.*.name"
         valueField: "authors.*.slug"
+      - label: "Featured Image"
+        name: "image"
+        widget: "image"
+        required: false
+        hint: "Upload a featured image for this blog post (recommended size: 1200x630px)"
+      - label: "Description"
+        name: "description"
+        widget: "text"
+        required: false
+        hint: "Brief description of the post for SEO and previews (recommended: 150-160 characters)"
       - label: Tags
         label_singular: "Tag"
         name: "tags"

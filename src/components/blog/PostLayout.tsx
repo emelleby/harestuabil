@@ -1,17 +1,18 @@
-import React from 'react'
-import styles from '../../public/styles/content.module.css'
-import Author from './Author'
-import Copyright from './Copyright'
-import Date from './Date'
-import Layout from './Layout'
-import BasicMeta from './meta/BasicMeta'
-import JsonLdMeta from './meta/JsonLdMeta'
-import OpenGraphMeta from './meta/OpenGraphMeta'
-import TwitterCardMeta from './meta/TwitterCardMeta'
-import { SocialList } from './SocialList'
+import Image from 'next/image'
+import type React from 'react'
+import styles from '../../../public/styles/content.module.css'
+import { getAuthor } from '../../lib/authors'
+import { getTag } from '../../lib/tags'
+import Author from '../Author'
+import Copyright from '../Copyright'
+import FormatDate from '../FormatDate'
+import Layout from '../Layout'
+import BasicMeta from '../meta/BasicMeta'
+import JsonLdMeta from '../meta/JsonLdMeta'
+import OpenGraphMeta from '../meta/OpenGraphMeta'
+import TwitterCardMeta from '../meta/TwitterCardMeta'
+import { SocialList } from '../SocialList'
 import TagButton from './TagButton'
-import { getAuthor } from '../lib/authors'
-import { getTag } from '../lib/tags'
 
 type Props = {
   title: string
@@ -20,16 +21,17 @@ type Props = {
   tags: string[]
   author: string
   description?: string
+  image?: string
   children: React.ReactNode
 }
-export default function PostLayout({ title, date, slug, author, tags, description = '', children }: Props) {
+export default function PostLayout({ title, date, slug, author, tags, description = '', image, children }: Props) {
   const keywords = tags.map((it) => getTag(it)?.name || it)
   const authorName = getAuthor(author).name
   return (
     <Layout>
       <BasicMeta url={`/posts/${slug}`} title={title} keywords={keywords} description={description} />
-      <TwitterCardMeta url={`/posts/${slug}`} title={title} description={description} />
-      <OpenGraphMeta url={`/posts/${slug}`} title={title} description={description} />
+      <TwitterCardMeta url={`/posts/${slug}`} title={title} description={description} image={image} />
+      <OpenGraphMeta url={`/posts/${slug}`} title={title} description={description} image={image} />
       <JsonLdMeta
         url={`/posts/${slug}`}
         title={title}
@@ -44,13 +46,25 @@ export default function PostLayout({ title, date, slug, author, tags, descriptio
             <h1 className="mb-2 text-4xl">{title}</h1>
             <div className="metadata">
               <div className="inline-block mr-2">
-                <Date date={date} />
+                <FormatDate date={date} />
               </div>
               <div className="inline-block mr-2">
                 <Author author={getAuthor(author)} />
               </div>
             </div>
           </header>
+          {image && (
+            <div className="featured-image mb-8">
+              <Image
+                src={image}
+                alt={title}
+                width={800}
+                height={400}
+                className="w-full h-auto rounded-lg shadow-lg"
+                priority
+              />
+            </div>
+          )}
           <div className={styles.content}>{children}</div>
           <ul className="tag-list list-none text-right mt-7 p-0">
             {tags.map((it) => {

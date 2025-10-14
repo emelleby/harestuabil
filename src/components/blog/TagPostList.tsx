@@ -1,17 +1,16 @@
-import React from "react";
-import { PostContent } from "../lib/posts";
-import { TagContent } from "../lib/tags";
-import PostItem from "./PostItem";
-import Pagination from "./Pagination";
+import type { PostContent } from '../../lib/posts'
+import type { TagContent } from '../../lib/tags'
+import Pagination from './Pagination'
+import PostItem from './PostItem'
 
 type Props = {
-  posts: PostContent[];
-  tag: TagContent;
+  posts: PostContent[]
+  tag: TagContent
   pagination: {
-    current: number;
-    pages: number;
-  };
-};
+    current: number
+    pages: number
+  }
+}
 export default function TagPostList({ posts, tag, pagination }: Props) {
   return (
     <div className="flex flex-col mx-auto my-0 max-w-[1200px] w-full px-6">
@@ -19,8 +18,8 @@ export default function TagPostList({ posts, tag, pagination }: Props) {
         All posts / <span className="font-bold text-foreground">{tag.name}</span>
       </h1>
       <ul className="m-0 p-0 flex-1">
-        {posts.map((it, i) => (
-          <li key={i} className="list-none mb-6">
+        {posts.map((it) => (
+          <li key={it.slug} className="list-none mb-6">
             <PostItem post={it} />
           </li>
         ))}
@@ -29,13 +28,10 @@ export default function TagPostList({ posts, tag, pagination }: Props) {
         current={pagination.current}
         pages={pagination.pages}
         link={{
-          href: () => "/posts/tags/[[...slug]]",
-          as: (page) =>
-            page === 1
-              ? "/posts/tags/" + tag.slug
-              : `/posts/tags/${tag.slug}/${page}`,
+          href: () => '/posts/tags/[[...slug]]',
+          as: (page) => (page === 1 ? '/posts/tags/' + tag.slug : `/posts/tags/${tag.slug}/${page}`)
         }}
       />
     </div>
-  );
+  )
 }
