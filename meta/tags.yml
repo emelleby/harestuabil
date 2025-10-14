@@ -1,4 +1,12 @@
 tags:
+  - slug: vedlikehold
+    name: Vedlikehold
+  - slug: tips
+    name: Tips
+  - slug: nyheter
+    name: Nyheter
+  - slug: sesongguide
+    name: Sesongguide
   - slug: document
     name: document
   - slug: mock

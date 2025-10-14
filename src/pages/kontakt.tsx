@@ -1,74 +1,88 @@
-import { GetStaticProps } from "next";
-import { serialize } from "next-mdx-remote/serialize";
-import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
-import matter from "gray-matter";
-import fs from "fs";
-import yaml from "js-yaml";
-import { getPageBySlug } from "../lib/pages";
-import PageLayout from "../components/PageLayout";
-import { ContactForm } from "../components/ContactForm";
+import { GetStaticProps } from 'next'
+import { serialize } from 'next-mdx-remote/serialize'
+import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
+import matter from 'gray-matter'
+import fs from 'fs'
+import yaml from 'js-yaml'
+import { getPageBySlug } from '../lib/pages'
+import PageLayout from '../components/PageLayout'
+import { ContactForm } from '../components/ContactForm'
+import { KontaktInfo } from '../components/KontaktInfo'
+import { KartVisning } from '../components/KartVisning'
+import { OfteStilteSporsmal } from '../components/OfteStilteSporsmal'
 
 export type Props = {
-  title: string;
-  slug: string;
-  description?: string;
-  keywords?: string[];
-  source: MDXRemoteSerializeResult;
-};
+  title: string
+  slug: string
+  description?: string
+  keywords?: string[]
+  source: MDXRemoteSerializeResult
+}
 
 // MDX components that can be used in page content
 const components = {
   // Add any custom components you want to use in pages here
-};
+}
 
-export default function Contact({
-  title,
-  slug,
-  description,
-  keywords,
-  source,
-}: Props) {
+export default function Contact({ title, slug, description, keywords, source }: Props) {
   return (
-    <PageLayout
-      title={title}
-      slug={slug}
-      description={description}
-      keywords={keywords}
-    >
-      <MDXRemote {...source} components={components} />
-
-      {/* Contact Form */}
-      <div className="mt-12">
-        <ContactForm />
+    <PageLayout title={title} slug={slug} description={description} keywords={keywords}>
+      {/* Page Content from MDX */}
+      <div className='mb-12'>
+        <MDXRemote {...source} components={components} />
       </div>
+
+      {/* Contact Form - Prominently displayed */}
+      <section className='mb-16'>
+        <h2 className='text-3xl font-bold mb-8 text-center'>Kontakt Oss</h2>
+        <div className='max-w-2xl mx-auto'>
+          <ContactForm />
+        </div>
+      </section>
+
+      {/* Business Information */}
+      <section className='mb-16'>
+        <h2 className='text-3xl font-bold mb-8 text-center'>Besøk Oss</h2>
+        <KontaktInfo />
+      </section>
+
+      {/* Map */}
+      <section className='mb-16'>
+        <KartVisning />
+      </section>
+
+      {/* FAQ */}
+      <section className='mb-16'>
+        <OfteStilteSporsmal />
+      </section>
     </PageLayout>
-  );
+  )
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const pageData = getPageBySlug("contact");
+  const pageData = getPageBySlug('contact')
 
   if (!pageData) {
     return {
       notFound: true,
-    };
+    }
   }
 
-  const source = fs.readFileSync(pageData.fullPath, "utf8");
+  const source = fs.readFileSync(pageData.fullPath, 'utf8')
   const { content, data } = matter(source, {
     engines: {
       yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as object,
     },
-  });
-  const mdxSource = await serialize(content, { scope: data });
+  })
+  const mdxSource = await serialize(content, { scope: data })
 
   return {
     props: {
       title: data.title,
       slug: data.slug,
-      description: data.description || "",
+      description: data.description || '',
       keywords: data.keywords || [],
       source: mdxSource,
     },
-  };
-};
+  }
+}
