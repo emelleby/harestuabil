@@ -1,10 +1,9 @@
 import { parseISO } from 'date-fns'
 import Image from 'next/image'
 import Link from 'next/link'
-
-import PostDate from '../Date'
-import { Card, CardContent } from '../ui/card'
 import type { PostContent } from '../../lib/posts'
+import PostDate from '../FormatDate'
+import { Card, CardContent } from '../ui/card'
 
 type Props = {
   post: PostContent

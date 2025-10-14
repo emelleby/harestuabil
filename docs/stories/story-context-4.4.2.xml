@@ -1,0 +1,214 @@
+<story-context id="bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>4</epicId>
+    <storyId>4.2</storyId>
+    <title>Individual Blog Post Template Design</title>
+    <status>Draft</status>
+    <generatedAt>2025-10-14</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/stories/4.2.individual-blog-post-template.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>reader who has selected a blog article</asA>
+    <iWant>a comfortable reading experience with proper typography and related content suggestions</iWant>
+    <soThat>I can easily consume the content and discover more relevant articles</soThat>
+    <tasks>
+      - Create individual blog post template structure (AC: 1, 2)
+      - Implement MDX content rendering (AC: 3)
+      - Add post metadata display (AC: 4)
+      - Implement related articles section (AC: 5)
+      - Optimize for mobile reading (AC: 6)
+      - Add social sharing functionality (AC: 7)
+    </tasks>
+  </story>
+
+  <acceptanceCriteria>
+    1. Clean, readable typography optimized for Norwegian language with line width of 73 characters
+    2. Proper heading hierarchy and content structure throughout the post
+    3. Image support via MDX with proper alt text and captions
+    4. Author information and publication date display in Norwegian format
+    5. Related articles section at the bottom of each post (latest 3 articles in same category)
+    6. Mobile-optimized reading experience with adjustable text size
+    7. Social sharing functionality for Norwegian social platforms
+    8. Reading time estimation displayed prominently
+  </acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <doc>
+        <path>docs/epics/epic-4-blog-design.md</path>
+        <title>Epic 4: Blog Design and Content System</title>
+        <section>Individual Blog Post Template</section>
+        <snippet>Clean, readable typography optimized for Norwegian language with line width of 73 chars. Proper heading hierarchy, image support via MDX, author information and publication date display, related articles section (latest 3 in same category), mobile-optimized reading with adjustable text size, social sharing, and reading time estimation.</snippet>
+      </doc>
+      <doc>
+        <path>docs/architecture/brownfield-architecture.md</path>
+        <title>Brownfield Architecture Document</title>
+        <section>Data Models and APIs</section>
+        <snippet>Blog posts are MDX files in content/posts/ with frontmatter. Static site generation with no server-side endpoints. Content loading utilities in src/lib/posts.ts. DecapCMS for content management.</snippet>
+      </doc>
+      <doc>
+        <path>docs/architecture/tech-stack.md</path>
+        <title>Tech Stack Documentation</title>
+        <section>Styling and Framework</section>
+        <snippet>Tailwind CSS v4.1.13 for utility-first styling. Shadcn/UI components for consistent design. Next.js 15+ with TypeScript 5.9.2. Norwegian language support with Bokmål (nb) tags, Norwegian date/time formatting, and cultural adaptations.</snippet>
+      </doc>
+      <doc>
+        <path>docs/architecture/coding-standards.md</path>
+        <title>Coding Standards</title>
+        <section>Norwegian Language Implementation</section>
+        <snippet>Norwegian UI text constants in NORWEGIAN_TEXTS object. Date formatting using toLocaleDateString('nb-NO') with DD.MM.YYYY format. Norwegian typography and language attributes (lang="nb") throughout components.</snippet>
+      </doc>
+      <doc>
+        <path>docs/qa/tdd-strategy.md</path>
+        <title>TDD Strategy</title>
+        <section>Testing Framework and Coverage</section>
+        <snippet>Jest with TypeScript support and React Testing Library. Tests in src/__tests__/ directory. Coverage thresholds: 80% statements, 75% branches, 85% functions, 80% lines. Use Given-When-Then pattern for test structure.</snippet>
+      </doc>
+      <doc>
+        <path>docs/TAILWIND_SHADCN_SETUP.md</path>
+        <title>Tailwind and Shadcn Setup</title>
+        <section>Configuration</section>
+        <snippet>Tailwind CSS v4 with PostCSS plugin. Shadcn/UI components in src/components/ui/. CSS variables for theming in public/styles/global.css. Path aliases configured (@/ → ./src/).</snippet>
+      </doc>
+    </docs>
+    <code>
+      <artifact>
+        <path>src/components/blog/PostLayout.tsx</path>
+        <kind>component</kind>
+        <symbol>PostLayout</symbol>
+        <lines>1-193</lines>
+        <reason>Existing blog post layout component that needs enhancement. Currently has basic structure with featured image, metadata, and content rendering. Needs Norwegian date formatting, reading time, related posts, and improved typography.</reason>
+      </artifact>
+      <artifact>
+        <path>src/pages/posts/[post].tsx</path>
+        <kind>page</kind>
+        <symbol>Post</symbol>
+        <lines>1-100</lines>
+        <reason>Dynamic blog post page using PostLayout. Handles MDX rendering with next-mdx-remote. Needs integration with enhanced PostLayout features.</reason>
+      </artifact>
+      <artifact>
+        <path>src/lib/posts.ts</path>
+        <kind>utility</kind>
+        <symbol>fetchPostContent, listPostContent</symbol>
+        <lines>1-86</lines>
+        <reason>Content loading utilities for blog posts. Used to fetch posts for related articles logic. Includes filtering by tags which is needed for related posts feature.</reason>
+      </artifact>
+      <artifact>
+        <path>src/components/FormatDate.tsx</path>
+        <kind>component</kind>
+        <symbol>FormatDate</symbol>
+        <lines>1-13</lines>
+        <reason>Date formatting component currently using English format. Needs update to Norwegian format (DD.MM.YYYY) as per AC 4.</reason>
+      </artifact>
+      <artifact>
+        <path>src/components/blog/ArticleCard.tsx</path>
+        <kind>component</kind>
+        <symbol>ArticleCard</symbol>
+        <lines>1-82</lines>
+        <reason>Existing article card component with Norwegian styling. Can be reused for related articles section with minor modifications.</reason>
+      </artifact>
+      <artifact>
+        <path>src/lib/tags.ts</path>
+        <kind>utility</kind>
+        <symbol>getTag, listTags</symbol>
+        <lines>1-24</lines>
+        <reason>Tag utilities for Norwegian categories. Used to fetch tag information for related posts filtering.</reason>
+      </artifact>
+      <artifact>
+        <path>src/lib/authors.ts</path>
+        <kind>utility</kind>
+        <symbol>getAuthor</symbol>
+        <lines>1-21</lines>
+        <reason>Author information utilities. Used for displaying author metadata in Norwegian format.</reason>
+      </artifact>
+      <artifact>
+        <path>public/styles/content.module.css</path>
+        <kind>stylesheet</kind>
+        <symbol>content styles</symbol>
+        <lines>1-200</lines>
+        <reason>Content typography styles. Needs adjustment for 73 character line width and Norwegian typography optimization.</reason>
+      </artifact>
+    </code>
+    <dependencies>
+      <node>
+        <package name="next" version="^15.1.6" />
+        <package name="react" version="^19.1.1" />
+        <package name="react-dom" version="^19.1.1" />
+        <package name="next-mdx-remote" version="^5.0.0" />
+        <package name="date-fns" version="^4.1.0" />
+        <package name="gray-matter" version="^4.0.3" />
+        <package name="tailwindcss" version="^4.1.13" />
+        <package name="@radix-ui/react-separator" version="^1.1.7" />
+        <package name="lucide-react" version="^0.544.0" />
+        <package name="jest" version="^30.2.0" />
+        <package name="@testing-library/react" version="^16.3.0" />
+        <package name="@testing-library/jest-dom" version="^6.9.0" />
+        <package name="ts-jest" version="^29.4.4" />
+      </node>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    - Must maintain existing Shadcn/UI component patterns and design system
+    - Norwegian language support throughout (Bokmål - nb locale)
+    - Static export configuration (output: 'export') for Netlify deployment
+    - Mobile-first responsive design approach
+    - Preserve existing DecapCMS blog functionality
+    - Typography must support Norwegian characters and 73 character line width
+    - Date formatting must use Norwegian standards (DD.MM.YYYY)
+    - All new components must follow existing file structure in src/components/blog/
+    - Tests must be placed in src/__tests__/components/blog/ and src/__tests__/pages/posts/
+    - Must reuse existing interfaces and utilities rather than creating new ones
+    - Featured image should be displayed prominently at the top (per user design guidance)
+  </constraints>
+
+  <interfaces>
+    <interface>
+      <name>PostContent</name>
+      <kind>TypeScript interface</kind>
+      <signature>type PostContent = { readonly date: string; readonly title: string; readonly slug: string; readonly tags?: string[]; readonly image?: string; readonly description?: string; readonly fullPath: string; }</signature>
+      <path>src/lib/posts.ts</path>
+    </interface>
+    <interface>
+      <name>PostLayout Props</name>
+      <kind>React component props</kind>
+      <signature>type Props = { title: string; date: Date; slug: string; tags: string[]; author: string; description?: string; image?: string; children: React.ReactNode; }</signature>
+      <path>src/components/blog/PostLayout.tsx</path>
+    </interface>
+    <interface>
+      <name>TagContent</name>
+      <kind>TypeScript interface</kind>
+      <signature>type TagContent = { readonly slug: string; readonly name: string; }</signature>
+      <path>src/lib/tags.ts</path>
+    </interface>
+    <interface>
+      <name>AuthorContent</name>
+      <kind>TypeScript interface</kind>
+      <signature>type AuthorContent = { readonly slug: string; readonly name: string; readonly introduction: string; }</signature>
+      <path>src/lib/authors.ts</path>
+    </interface>
+  </interfaces>
+
+  <tests>
+    <standards>Jest testing framework with TypeScript support and React Testing Library for component testing. Tests follow Given-When-Then pattern. Module path mapping configured for @/ imports. Test environment is jsdom with setup file at src/__tests__/setup.ts.</standards>
+    <locations>
+      <location>src/__tests__/components/blog/PostLayout.test.tsx</location>
+      <location>src/__tests__/components/blog/RelatedPosts.test.tsx</location>
+      <location>src/__tests__/pages/posts/[post].test.tsx</location>
+      <location>src/__tests__/lib/readingTime.test.ts</location>
+    </locations>
+    <ideas>
+      <idea ac="1">Test that post content container has max-width corresponding to 73 characters. Test Norwegian typography rendering with proper character support.</idea>
+      <idea ac="2">Test heading hierarchy (h1, h2, h3) is properly rendered. Test content structure follows semantic HTML.</idea>
+      <idea ac="3">Test MDX image rendering with alt text. Test image captions display correctly. Test image responsive sizing.</idea>
+      <idea ac="4">Test author information displays with Norwegian formatting. Test publication date uses Norwegian format (DD.MM.YYYY). Test reading time calculation and display.</idea>
+      <idea ac="5">Test related articles logic filters by category/tag. Test related articles section shows maximum 3 articles. Test related articles from same category are displayed.</idea>
+      <idea ac="6">Test responsive typography scales properly on mobile. Test text size adjustment controls work. Test mobile spacing and readability.</idea>
+      <idea ac="7">Test social sharing buttons render for Norwegian platforms. Test Open Graph metadata is correct. Test shareable links include proper Norwegian context.</idea>
+      <idea ac="8">Test reading time estimation is calculated correctly. Test reading time is displayed prominently in metadata section.</idea>
+    </ideas>
+  </tests>
+</story-context>
+

@@ -1,84 +1,127 @@
-import fs from "fs";
-import matter from "gray-matter";
-import path from "path";
-import yaml from "js-yaml";
+import fs from "fs"
+import matter from "gray-matter"
+import yaml from "js-yaml"
+import path from "path"
 
-const postsDirectory = path.join(process.cwd(), "content/posts");
+const postsDirectory = path.join(process.cwd(), "content/posts")
 
 export type PostContent = {
-  readonly date: string;
-  readonly title: string;
-  readonly slug: string;
-  readonly tags?: string[];
-  readonly image?: string;
-  readonly description?: string;
-  readonly fullPath: string;
-};
+	readonly date: string
+	readonly title: string
+	readonly slug: string
+	readonly tags?: string[]
+	readonly image?: string
+	readonly description?: string
+	readonly fullPath: string
+}
 
-let postCache: PostContent[];
+let postCache: PostContent[]
 
 export function fetchPostContent(): PostContent[] {
-  if (postCache) {
-    return postCache;
-  }
-  // Get file names under /posts
-  const fileNames = fs.readdirSync(postsDirectory);
-  const allPostsData = fileNames
-    .filter((it) => it.endsWith(".mdx"))
-    .map((fileName) => {
-      // Read markdown file as string
-      const fullPath = path.join(postsDirectory, fileName);
-      const fileContents = fs.readFileSync(fullPath, "utf8");
+	if (postCache) {
+		return postCache
+	}
+	// Get file names under /posts
+	const fileNames = fs.readdirSync(postsDirectory)
+	const allPostsData = fileNames
+		.filter((it) => it.endsWith(".mdx"))
+		.map((fileName) => {
+			// Read markdown file as string
+			const fullPath = path.join(postsDirectory, fileName)
+			const fileContents = fs.readFileSync(fullPath, "utf8")
 
-      // Use gray-matter to parse the post metadata section
-      const matterResult = matter(fileContents, {
-        engines: {
-          yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as object,
-        },
-      });
-      const matterData = matterResult.data as {
-        date: string;
-        title: string;
-        tags: string[];
-        slug: string;
-        fullPath: string,
-      };
-      matterData.fullPath = fullPath;
+			// Use gray-matter to parse the post metadata section
+			const matterResult = matter(fileContents, {
+				engines: {
+					yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as object
+				}
+			})
+			const matterData = matterResult.data as {
+				date: string
+				title: string
+				tags: string[]
+				slug: string
+				image?: string
+				description?: string
+				fullPath: string
+			}
+			matterData.fullPath = fullPath
 
-      const slug = fileName.replace(/\.mdx$/, "");
+			const slug = fileName.replace(/\.mdx$/, "")
 
-      // Validate slug string
-      if (matterData.slug !== slug) {
-        throw new Error(
-          "slug field not match with the path of its content source"
-        );
-      }
+			// Validate slug string
+			if (matterData.slug !== slug) {
+				throw new Error("slug field not match with the path of its content source")
+			}
 
-      return matterData;
-    });
-  // Sort posts by date
-  postCache = allPostsData.sort((a, b) => {
-    if (a.date < b.date) {
-      return 1;
-    } else {
-      return -1;
-    }
-  });
-  return postCache;
+			return matterData
+		})
+	// Sort posts by date
+	postCache = allPostsData.sort((a, b) => {
+		if (a.date < b.date) {
+			return 1
+		} else {
+			return -1
+		}
+	})
+	return postCache
 }
 
 export function countPosts(tag?: string): number {
-  return fetchPostContent().filter(
-    (it) => !tag || (it.tags && it.tags.includes(tag))
-  ).length;
+	return fetchPostContent().filter((it) => !tag || (it.tags && it.tags.includes(tag))).length
 }
 
-export function listPostContent(
-  page: number,
-  limit: number,
-  tag?: string
+export function listPostContent(page: number, limit: number, tag?: string): PostContent[] {
+	return fetchPostContent()
+		.filter((it) => !tag || (it.tags && it.tags.includes(tag)))
+		.slice((page - 1) * limit, page * limit)
+}
+
+/**
+ * Get related posts by matching tags
+ * Returns posts that share at least one tag with the given post
+ * Sorted by number of matching tags (most relevant first)
+ */
+export function getRelatedPosts(
+	currentSlug: string,
+	tags: string[],
+	limit: number = 3
 ): PostContent[] {
-  return fetchPostContent()
-    .filter((it) => !tag || (it.tags && it.tags.includes(tag)))
-    .slice((page - 1) * limit, page * limit);
+	if (!tags || tags.length === 0) {
+		// If no tags, return latest posts
+		return fetchPostContent()
+			.filter((it) => it.slug !== currentSlug)
+			.slice(0, limit)
+	}
+
+	const allPosts = fetchPostContent()
+
+	// Calculate relevance score for each post
+	const postsWithScore = allPosts
+		.filter((post) => post.slug !== currentSlug)
+		.map((post) => {
+			const matchingTags = post.tags?.filter((tag) => tags.includes(tag)).length || 0
+			return { post, score: matchingTags }
+		})
+		.filter((item) => item.score > 0) // Only posts with at least one matching tag
+		.sort((a, b) => {
+			// Sort by score (descending), then by date (newest first)
+			if (b.score !== a.score) {
+				return b.score - a.score
+			}
+			return b.post.date.localeCompare(a.post.date)
+		})
+
+	// If we don't have enough related posts, fill with latest posts
+	const relatedPosts = postsWithScore.map((item) => item.post)
+	if (relatedPosts.length < limit) {
+		const additionalPosts = allPosts
+			.filter(
+				(post) => post.slug !== currentSlug && !relatedPosts.find((rp) => rp.slug === post.slug)
+			)
+			.slice(0, limit - relatedPosts.length)
+		relatedPosts.push(...additionalPosts)
+	}
+
+	return relatedPosts.slice(0, limit)
 }
