@@ -86,6 +86,13 @@ collections:
                 name: "name"
                 widget: "string"
                 hint: "First and Last"
+              - label: "Profile Picture"
+                name: "profile_picture"
+                widget: "image"
+                required: false
+                media_folder: "/public/images/authors"
+                public_folder: "/images/authors"
+                hint: "Upload author profile picture (recommended size: 200x200px). File will be saved as {slug}.jpg"
               - label: "Introduction"
                 name: "introduction"
                 widget: "text"

@@ -10,7 +10,11 @@
 
 .content {
   font-family: "Inter", sans-serif;
-  color: var(--color-foreground); /* Use semantic theme color instead of hardcoded #222 */
+  color: var(--color-foreground);
+  /* Optimized for Norwegian typography with 73 character line width */
+  max-width: 73ch; /* 73 characters for optimal Norwegian readability */
+  line-height: 1.75;
+  font-size: 1.125rem; /* 18px for better readability */
 }
 
 .content time {
@@ -18,8 +22,8 @@
 }
 
 .content p {
-  line-height: 1.5rem;
-  margin: 0.5rem 0 0 0;
+  line-height: 1.75;
+  margin: 1.25rem 0;
 }
 
 
@@ -31,18 +35,19 @@
 }
 
 .content h2 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin: 2rem 0 0 0;
-  line-height: 1.25em;
-  color: var(--color-foreground); /* Use semantic theme color instead of hardcoded #222 */
+  font-size: 1.875rem; /* 30px */
+  font-weight: 700;
+  margin: 2.5rem 0 1rem 0;
+  line-height: 1.3;
+  color: var(--color-foreground);
 }
 
 .content h3 {
-  font-size: 1.25rem;
-  font-weight: 500;
-  margin: 1rem 0 0 0;
-  color:  var(--color-sidebar-foreground);
+  font-size: 1.5rem; /* 24px */
+  font-weight: 600;
+  margin: 2rem 0 0.75rem 0;
+  line-height: 1.4;
+  color: var(--color-foreground);
 }
 
 .content h4,

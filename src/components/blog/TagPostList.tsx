@@ -1,7 +1,7 @@
 import type { PostContent } from '../../lib/posts'
 import type { TagContent } from '../../lib/tags'
+import ArticleCard from './ArticleCard'
 import Pagination from './Pagination'
-import PostItem from './PostItem'
 
 type Props = {
   posts: PostContent[]
@@ -17,13 +17,14 @@ export default function TagPostList({ posts, tag, pagination }: Props) {
       <h1 className="mb-8 p-0 font-thin text-3xl md:text-4xl text-muted-foreground">
         All posts / <span className="font-bold text-foreground">{tag.name}</span>
       </h1>
-      <ul className="m-0 p-0 flex-1">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
         {posts.map((it) => (
-          <li key={it.slug} className="list-none mb-6">
-            <PostItem post={it} />
-          </li>
+          <div key={it.slug} className="list-none mb-6">
+            <ArticleCard post={it} />
+          </div>
         ))}
-      </ul>
+      </div>
+
       <Pagination
         current={pagination.current}
         pages={pagination.pages}
