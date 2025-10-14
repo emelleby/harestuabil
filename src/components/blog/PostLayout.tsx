@@ -62,7 +62,7 @@ export default function PostLayout({
         {image && (
           <div className="w-full h-[500px] relative overflow-hidden z-0">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background z-10" />
-            <div className="max-w-max mx-auto h-full">
+            <div className="max-w-screen-2xl mx-auto h-full">
               <Image src={image} alt={title} width={1200} height={500} className="w-full h-full object-cover" />
             </div>
           </div>
