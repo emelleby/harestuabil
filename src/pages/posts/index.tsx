@@ -52,9 +52,9 @@ export default function Index({ posts, tags, pagination }: Props) {
 
   // Featured post (first post) and regular posts for grid
   const featuredPost = posts[0]
-  // For the grid, we want to show posts 2-6 (5 posts) when no filter/search is active
+  // For the grid, we want to show posts 2-7 (6 posts) when no filter/search is active
   // When filter/search is active, we show all filtered posts (no featured article)
-  const regularPosts = searchQuery || selectedTag ? filteredPosts : posts.slice(1, 6) // Show posts 2-6 (5 posts) for the grid
+  const regularPosts = searchQuery || selectedTag ? filteredPosts : posts.slice(1, 7) // Show posts 2-7 (6 posts) for the grid
 
   return (
     <Layout>
@@ -81,13 +81,13 @@ export default function Index({ posts, tags, pagination }: Props) {
           <section className="mb-12">
             <h2 className="text-2xl font-semibold mb-6 text-foreground">Utvalgt artikkel</h2>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-6 bg-muted/30 rounded-lg">
-              <div className="lg:order-2">
-                <ArticleCard post={featuredPost} />
-              </div>
               <div className="lg:order-1 flex flex-col justify-center">
-                <h3 className="text-xl font-medium mb-3 text-foreground">{featuredPost.title}</h3>
-                {featuredPost.description && <p className="text-muted-foreground mb-4">{featuredPost.description}</p>}
-                <p className="text-sm text-muted-foreground">Les mer om dette viktige temaet</p>
+                <h3 className="text-xl font-medium mb-3 text-foreground">{title}</h3>
+                {description && <p className="text-muted-foreground mb-4">{description}</p>}
+                <p className="text-sm text-muted-foreground">Les mer om hva vi har lært gjennom mange år i bransjen.</p>
+              </div>
+              <div className="">
+                <ArticleCard post={featuredPost} />
               </div>
             </div>
           </section>
@@ -146,7 +146,7 @@ export default function Index({ posts, tags, pagination }: Props) {
 
 export const getStaticProps: GetStaticProps = async () => {
   // For page 1, we need one extra post since the first post becomes the featured article
-  // This ensures we show: 1 featured + 5 in grid = 6 total posts on page 1
+  // This ensures we show: 1 featured + 6 in grid = 7 total posts on page 1
   const postsToFetch = config.posts_per_page + 1
   const posts = listPostContent(1, postsToFetch)
   const tags = listTags()
