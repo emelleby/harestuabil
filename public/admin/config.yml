@@ -135,8 +135,8 @@ collections:
         name: "date"
         widget: "datetime"
         format: "YYYY-MM-DD"
-        dateFormat: "YYYY-MM-DD"
-        timeFormat: false
+        date_format: "YYYY-MM-DD"
+        time_format: false
       - label: Author
         name: "author"
         widget: relation
@@ -214,8 +214,8 @@ collections:
         name: "updated"
         widget: "datetime"
         format: "YYYY-MM-DD"
-        dateFormat: "YYYY-MM-DD"
-        timeFormat: false
+        date_format: "YYYY-MM-DD"
+        time_format: false
         required: false
         hint: "When this page was last updated (optional)"
       - label: "Body"
@@ -295,7 +295,7 @@ collections:
         name: "updated"
         widget: "datetime"
         format: "YYYY-MM-DD"
-        dateFormat: "YYYY-MM-DD"
-        timeFormat: false
+        date_format: "YYYY-MM-DD"
+        time_format: false
         required: false
         hint: "Når denne tjenestesiden sist ble oppdatert"
