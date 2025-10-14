@@ -10,6 +10,7 @@ import { ContactForm } from '../components/ContactForm'
 import { KontaktInfo } from '../components/KontaktInfo'
 import { KartVisning } from '../components/KartVisning'
 import { OfteStilteSporsmal } from '../components/OfteStilteSporsmal'
+import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
 
 export type Props = {
   title: string
@@ -28,31 +29,35 @@ export default function Contact({ title, slug, description, keywords, source }: 
   return (
     <PageLayout title={title} slug={slug} description={description} keywords={keywords}>
       {/* Page Content from MDX */}
-      <div className='mb-12'>
+      <div className="mb-12">
         <MDXRemote {...source} components={components} />
       </div>
 
       {/* Contact Form - Prominently displayed */}
-      <section className='mb-16'>
-        <h2 className='text-3xl font-bold mb-8 text-center'>Kontakt Oss</h2>
-        <div className='max-w-2xl mx-auto'>
-          <ContactForm />
-        </div>
+      <section className="mb-8">
+        <Card>
+          <CardHeader>
+            <CardTitle>Kontakt oss</CardTitle>
+          </CardHeader>
+          <CardContent className="px-2 py-4">
+            <ContactForm />
+          </CardContent>
+        </Card>
       </section>
 
       {/* Business Information */}
-      <section className='mb-16'>
-        <h2 className='text-3xl font-bold mb-8 text-center'>Besøk Oss</h2>
+      <section className="mb-16">
+        <h2 className="text-3xl font-bold mb-8 text-center">Besøk Oss</h2>
         <KontaktInfo />
       </section>
 
       {/* Map */}
-      <section className='mb-16'>
+      <section className="mb-16">
         <KartVisning />
       </section>
 
       {/* FAQ */}
-      <section className='mb-16'>
+      <section className="mb-16">
         <OfteStilteSporsmal />
       </section>
     </PageLayout>
@@ -64,15 +69,15 @@ export const getStaticProps: GetStaticProps = async () => {
 
   if (!pageData) {
     return {
-      notFound: true,
+      notFound: true
     }
   }
 
   const source = fs.readFileSync(pageData.fullPath, 'utf8')
   const { content, data } = matter(source, {
     engines: {
-      yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as object,
-    },
+      yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as object
+    }
   })
   const mdxSource = await serialize(content, { scope: data })
 
@@ -82,7 +87,7 @@ export const getStaticProps: GetStaticProps = async () => {
       slug: data.slug,
       description: data.description || '',
       keywords: data.keywords || [],
-      source: mdxSource,
-    },
+      source: mdxSource
+    }
   }
 }

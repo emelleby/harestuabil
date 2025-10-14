@@ -7,13 +7,7 @@ import { z } from 'zod'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Form, FormField, FormMessage } from '@/components/ui/form'
 import {
@@ -24,7 +18,7 @@ import {
   FieldGroup,
   FieldLabel,
   FieldLegend,
-  FieldSet,
+  FieldSet
 } from '@/components/ui/field'
 import { ServiceType } from '@/types/service'
 import Link from 'next/link'
@@ -34,24 +28,24 @@ const SERVICE_LABELS: Record<ServiceType, string> = {
   verksted: 'Verksted',
   'dekk-og-felg': 'Dekk og felg',
   dekkhotell: 'Dekkhotell',
-  bilglass: 'Bilglass',
+  bilglass: 'Bilglass'
 }
 
 // Zod schema for form validation
 const formSchema = z.object({
   navn: z.string().min(2, {
-    message: 'Navn er påkrevd',
+    message: 'Navn er påkrevd'
   }),
   epost: z.email('Ugyldig e-postadresse'),
   telefon: z.string().optional(),
   tjenesteType: z.string().optional(),
   melding: z.string().min(10, {
-    message: 'Vi vil gjerne ha en melding! 10+ tegn',
+    message: 'Vi vil gjerne ha en melding! 10+ tegn'
   }),
   personvernAccept: z.boolean().refine((val) => val === true, {
-    message: 'Du må akseptere personvernerklæringen',
+    message: 'Du må akseptere personvernerklæringen'
   }),
-  honeypot: z.string().optional(),
+  honeypot: z.string().optional()
 })
 
 type FormData = z.infer<typeof formSchema>
@@ -77,8 +71,8 @@ export function ContactForm() {
       tjenesteType: '',
       melding: '',
       personvernAccept: false,
-      honeypot: '',
-    },
+      honeypot: ''
+    }
   })
 
   // 2. Define submit handler
@@ -96,13 +90,13 @@ export function ContactForm() {
         epost: values.epost,
         telefon: values.telefon || '',
         tjenesteType: values.tjenesteType || '',
-        melding: values.melding || '',
+        melding: values.melding || ''
       }
 
       const response = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: encode(formData),
+        body: encode(formData)
       })
 
       if (response.ok) {
@@ -111,9 +105,7 @@ export function ContactForm() {
         throw new Error('Nettverksfeil ved innsending av skjema')
       }
     } catch (error) {
-      setSubmitError(
-        error instanceof Error ? error.message : 'En feil oppstod ved innsending av skjema'
-      )
+      setSubmitError(error instanceof Error ? error.message : 'En feil oppstod ved innsending av skjema')
     }
   }
 
@@ -126,14 +118,12 @@ export function ContactForm() {
 
   if (isSubmitted) {
     return (
-      <div className='flex flex-col items-center justify-center gap-4 bg-emerald-500/10 border border-emerald-500 rounded-lg p-6 text-center'>
-        <h3 className='text-lg font-semibold text-emerald-800 dark:text-emerald-200 mb-2'>
-          Takk for din henvendelse!
-        </h3>
-        <p className='text-green-700 dark:text-emerald-200'>
+      <div className="flex flex-col items-center justify-center gap-4 bg-emerald-500/10 border border-emerald-500 rounded-lg p-6 text-center">
+        <h3 className="text-lg font-semibold text-emerald-800 dark:text-emerald-200 mb-2">Takk for din henvendelse!</h3>
+        <p className="text-green-700 dark:text-emerald-200">
           Vi har mottatt din melding og vil kontakte deg så snart som mulig.
         </p>
-        <Button onClick={onReset} variant='outline'>
+        <Button onClick={onReset} variant="outline">
           Send ny henvendelse
         </Button>
       </div>
@@ -143,47 +133,47 @@ export function ContactForm() {
   return (
     <Form {...form}>
       <form
-        name='kontakt'
-        method='POST'
-        data-netlify='true'
+        name="kontakt"
+        method="POST"
+        data-netlify="true"
         onSubmit={form.handleSubmit(onSubmit)}
-        className='space-y-6 max-w-2xl'
-        role='form'
-        lang='nb'
+        className="space-y-6 max-w-2xl"
+        role="form"
+        lang="nb"
         noValidate
       >
         {/* Hidden field for Netlify Forms */}
-        <input type='hidden' name='form-name' value='kontakt' />
+        <input type="hidden" name="form-name" value="kontakt" />
 
         {/* Honeypot field */}
         <FormField
           control={form.control}
-          name='honeypot'
+          name="honeypot"
           render={({ field }) => (
             <input
               {...field}
-              type='text'
+              type="text"
               style={{ display: 'none' }}
-              data-testid='honeypot-field'
+              data-testid="honeypot-field"
               tabIndex={-1}
-              autoComplete='off'
+              autoComplete="off"
             />
           )}
         />
 
         <FieldGroup>
           <FieldSet>
-            <FieldLegend>Kontaktskjema</FieldLegend>
-
             <FormField
               control={form.control}
-              name='navn'
+              name="navn"
               render={({ field }) => (
-                <Field orientation='responsive'>
-                  <FieldLabel htmlFor='navn'>Navn *</FieldLabel>
-                  <Input id='navn' className='w-full' placeholder='' {...field} />
-                  <FieldError className=''>
-                    <FormMessage className='pl-4' />
+                <Field orientation="responsive">
+                  <FieldLabel htmlFor="navn">
+                    Navn <span className="text-rose-600">*</span>
+                  </FieldLabel>
+                  <Input id="navn" className="w-full" placeholder="" {...field} />
+                  <FieldError className="">
+                    <FormMessage className="pl-4" />
                   </FieldError>
                 </Field>
               )}
@@ -191,13 +181,15 @@ export function ContactForm() {
 
             <FormField
               control={form.control}
-              name='epost'
+              name="epost"
               render={({ field }) => (
-                <Field orientation='responsive'>
-                  <FieldLabel htmlFor='epost'>E-post *</FieldLabel>
-                  <Input id='epost' type='email' placeholder='' {...field} />
+                <Field orientation="responsive">
+                  <FieldLabel htmlFor="epost">
+                    E-post <span className="text-rose-600">*</span>
+                  </FieldLabel>
+                  <Input id="epost" type="email" placeholder="" {...field} />
                   <FieldError>
-                    <FormMessage className='pl-4' />
+                    <FormMessage className="pl-4" />
                   </FieldError>
                 </Field>
               )}
@@ -205,11 +197,11 @@ export function ContactForm() {
 
             <FormField
               control={form.control}
-              name='telefon'
+              name="telefon"
               render={({ field }) => (
-                <Field orientation='responsive'>
-                  <FieldLabel htmlFor='telefon'>Telefon</FieldLabel>
-                  <Input id='telefon' type='tel' placeholder='+47 123 45 678' {...field} />
+                <Field orientation="responsive">
+                  <FieldLabel htmlFor="telefon">Telefon</FieldLabel>
+                  <Input id="telefon" type="tel" placeholder="+47 123 45 678" {...field} />
                   <FieldError>
                     <FormMessage />
                   </FieldError>
@@ -219,13 +211,13 @@ export function ContactForm() {
 
             <FormField
               control={form.control}
-              name='tjenesteType'
+              name="tjenesteType"
               render={({ field }) => (
-                <Field orientation='responsive'>
-                  <FieldLabel htmlFor='tjenesteType'>Tjenestetype</FieldLabel>
+                <Field orientation="responsive">
+                  <FieldLabel htmlFor="tjenesteType">Tjenestetype</FieldLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <SelectTrigger id='tjenesteType'>
-                      <SelectValue placeholder='Velg tjeneste' />
+                    <SelectTrigger id="tjenesteType">
+                      <SelectValue placeholder="Velg tjeneste" />
                     </SelectTrigger>
                     <SelectContent>
                       {Object.entries(SERVICE_LABELS).map(([value, label]) => (
@@ -244,16 +236,13 @@ export function ContactForm() {
 
             <FormField
               control={form.control}
-              name='melding'
+              name="melding"
               render={({ field }) => (
                 <Field>
-                  <FieldLabel htmlFor='melding'>Melding *</FieldLabel>
-                  <Textarea
-                    id='melding'
-                    rows={4}
-                    placeholder='Beskriv hva du trenger hjelp med...'
-                    {...field}
-                  />
+                  <FieldLabel htmlFor="melding">
+                    Melding <span className="text-rose-600">*</span>
+                  </FieldLabel>
+                  <Textarea id="melding" rows={4} placeholder="Beskriv hva du trenger hjelp med..." {...field} />
                   <FieldError>
                     <FormMessage />
                   </FieldError>
@@ -263,21 +252,17 @@ export function ContactForm() {
 
             <FormField
               control={form.control}
-              name='personvernAccept'
+              name="personvernAccept"
               render={({ field }) => (
-                <Field orientation='horizontal'>
-                  <Checkbox
-                    id='personvernAccept'
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                  />
+                <Field orientation="horizontal">
+                  <Checkbox id="personvernAccept" checked={field.value} onCheckedChange={field.onChange} />
                   <FieldContent>
-                    <FieldLabel htmlFor='personvernAccept'>
-                      Jeg aksepterer <span className='text-red-600'>*</span>
+                    <FieldLabel htmlFor="personvernAccept">
+                      Jeg aksepterer <span className="text-rose-600">*</span>
                     </FieldLabel>
-                    <FieldDescription>
+                    <FieldDescription className="!m-0">
                       Aksept om at mine personopplysninger behandles i henhold til{' '}
-                      <Link href='/personvern'>personvernerklæringen</Link>
+                      <Link href="/personvern">personvernerklæringen</Link>
                     </FieldDescription>
                     <FieldError>
                       <FormMessage />
@@ -290,21 +275,16 @@ export function ContactForm() {
         </FieldGroup>
 
         {submitError && (
-          <div className='bg-rose-50 border border-rose-200 rounded-lg p-4'>
-            <p className='text-rose-700'>{submitError}</p>
+          <div className="bg-rose-50 border border-rose-200 rounded-lg p-4">
+            <p className="text-rose-700">{submitError}</p>
           </div>
         )}
 
-        <div className='flex gap-4 px-4'>
-          <Button type='submit' disabled={form.formState.isSubmitting} className='flex-1'>
+        <div className="flex gap-4 px-4">
+          <Button type="submit" disabled={form.formState.isSubmitting} className="flex-1">
             {form.formState.isSubmitting ? 'Sender...' : 'Send inn'}
           </Button>
-          <Button
-            type='button'
-            variant='outline'
-            onClick={onReset}
-            disabled={form.formState.isSubmitting}
-          >
+          <Button type="button" variant="outline" onClick={onReset} disabled={form.formState.isSubmitting}>
             Nullstill
           </Button>
         </div>
