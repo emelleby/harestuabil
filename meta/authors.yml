@@ -1,10 +1,13 @@
 authors:
   - slug: wutali
     name: Takahiro Fujiwara
-    introduction:
-      Co-founder and CTO at Fuller, Inc. / Software & Data Engineer /
+    introduction: Co-founder and CTO at Fuller, Inc. / Software & Data Engineer /
       Python / Golang / React
   - slug: mekaniker
     name: Harestua Bil Verksted
-    introduction:
-      Ekspert bilmekaniker med over 20 års erfaring. Spesialist på norske kjøreforhold og bilvedlikehold.
+    introduction: Ekspert bilmekaniker med over 20 års erfaring. Spesialist på
+      norske kjøreforhold og bilvedlikehold.
+  - slug: eivind
+    name: Eivind Melleby
+    profile_picture: /images/authors/profil_em.jpg
+    introduction: Cool kis
