@@ -44,7 +44,7 @@ export default function Index() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Button
                   size="lg"
-                  className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 shadow-lg"
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 shadow-lg cursor-pointer"
                   aria-label="Kontakt oss for å bestille time eller få mer informasjon"
                   tabIndex={0}
                   onClick={() => router.push("/kontakt")}
@@ -54,7 +54,7 @@ export default function Index() {
                 <Button
                   variant="outline"
                   size="lg"
-                  className="border-primary text-primary dark:hover:bg-primary/10 hover:text-primary px-8 py-3 bg-background/80 backdrop-blur-sm shadow-lg"
+                  className="border-primary cursor-pointer text-primary dark:hover:bg-primary/10 hover:text-primary px-8 py-3 bg-background/80 backdrop-blur-sm shadow-lg"
                   aria-label="Se oversikt over våre tjenester"
                   tabIndex={0}
                   onClick={() => router.push("/tjenester")}

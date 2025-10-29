@@ -12,7 +12,7 @@ type Props = {
 export default function ArticleCard({ post }: Props) {
   return (
     <Card className="group overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1 bg-card border border-border">
-      <Link href={`/posts/${post.slug}`} className="block text-foreground">
+      <Link href={`/posts/${post.slug}`} className="block text-foreground h-full flex flex-col">
         {post.image ? (
           <div className="relative h-48 w-full overflow-hidden">
             <Image
@@ -45,7 +45,7 @@ export default function ArticleCard({ post }: Props) {
           </div>
         )}
 
-        <CardContent className="p-4">
+        <CardContent className="p-4 flex flex-col flex-1">
           <div className="flex items-center gap-2 mb-3">
             <PostDate date={parseISO(post.date)} />
             {post.tags && post.tags.length > 0 && (
@@ -60,7 +60,9 @@ export default function ArticleCard({ post }: Props) {
           </h3>
 
           {post.description && (
-            <p className="text-sm text-muted-foreground line-clamp-3 leading-relaxed">{post.description}</p>
+            <p className="text-sm text-muted-foreground line-clamp-3 leading-relaxed grow">
+              {post.description}
+            </p>
           )}
 
           <div className="mt-4 flex items-center text-sm text-primary font-medium group-hover:gap-2 transition-all duration-200">

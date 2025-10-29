@@ -123,7 +123,7 @@ export function ContactForm() {
         <p className="text-green-700 dark:text-emerald-200">
           Vi har mottatt din melding og vil kontakte deg så snart som mulig.
         </p>
-        <Button onClick={onReset} variant="outline">
+        <Button className="cursor-pointer" onClick={onReset} variant="outline">
           Send ny henvendelse
         </Button>
       </div>
@@ -281,10 +281,10 @@ export function ContactForm() {
         )}
 
         <div className="flex gap-4 px-4">
-          <Button type="submit" disabled={form.formState.isSubmitting} className="flex-1">
+          <Button type="submit" disabled={form.formState.isSubmitting} className="flex-1 cursor-pointer">
             {form.formState.isSubmitting ? 'Sender...' : 'Send inn'}
           </Button>
-          <Button type="button" variant="outline" onClick={onReset} disabled={form.formState.isSubmitting}>
+          <Button className="cursor-pointer" type="button" variant="outline" onClick={onReset} disabled={form.formState.isSubmitting}>
             Nullstill
           </Button>
         </div>
